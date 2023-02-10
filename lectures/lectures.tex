@@ -1,0 +1,147 @@
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{listings}
+\newtheorem{theorem}{Теорема}
+\newtheorem{definition}{Определение}
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{lemma}[theorem]{Лемма}
+\title{Лекции по математическому анализу}
+\author{Титилин Александр}
+\date{}
+\begin{document}
+    \maketitle
+    \section{Равномерная непрерывность.}
+    \[
+    \forall x \in D \forall  \varepsilon > 0 \exists  \delta \forall y |x - y| < \delta\implies |f(x) -f(y)| < \varepsilon
+    .\] 
+    Определение непрерывной функции.
+    \[
+    \forall  \varepsilon > 0 \exists  \delta >0 \forall x \forall y |x- y| < \delta \implies |f(x) - f(y)| < \varepsilon
+    .\] 
+    Определение равномерно непрерывной функции.
+    \subsection{Примеры}
+    \begin{enumerate}
+        \item $f(x) =  C$
+            Берем любую дельту
+             \[
+                 |f(x) - f(y)| = 0 < \varepsilon
+            .\] 
+        \item $f(x) = ax + b$
+            \[
+            |f(x) - f(y)| = |ax + b - ay -b| =|a(x - y)| = |a||x - y|
+            .\] 
+            \begin{enumerate}
+                \item $a = 0 \implies$ прошлый пункт
+                \item $a \neq 0$ 
+                    \[
+                    \delta = \frac{\varepsilon}{|a|}
+                    .\] 
+            \end{enumerate}
+        \item $f(x) =  x^2 D = [a,b] a\neq b$
+            \[
+            \varepsilon > 0
+            .\] 
+            \[
+            |x^2 - y^2| = |(x - y)||(x + y)| \le  (|x| + |y|)|x - y| \le  2C|x - y|
+            .\] 
+            \[
+            C = \max(|a| , |b|)
+            .\] 
+            \[
+            \delta = \frac{\varepsilon}{2C}
+            .\] 
+        \item $f(x) = \frac{x^2}{x^2 + 1}$
+            \[
+            | \frac{x^2}{x^2 + 1} - \frac{y^2}{y^2 + 1} | =
+            |\frac{x^2y^2 + x^2 - x^2y^2 - y^2}{(x^2 + 1)(y^2 + 1)}| =
+            |\frac{x^2 - y^2}{(x^2 + 1)(y^2 + 1)}| =
+            |\frac{(x + y)(x - y)}{(x^2 + 1)(y^2 + 1)}|
+            .\] 
+    \end{enumerate}
+    \begin{definition}
+        Пусть $f: D \to \mathbb{R}$ говорят, что функция $f$ удовлетворяет условию Липшица
+     если 
+      \[
+     \exists  C \ge  0 \forall  x, y \in D : |f(x) - f(y)| < C|x - y|
+     .\] 
+    \end{definition}
+    \begin{theorem}
+        Если функция удовлетворяет условию Липщица на промежутке D, то она равномерно
+        непрерывна на промежутке D.
+    \end{theorem}
+    \begin{theorem}
+        Пусть функция задана на промежутке, функция удовлетворятет условию Гёльде, 
+        если
+        \[
+        \exists  C \ge  0 \exists  \alpha > 0 \forall  x, y \in D : |f(x)-f(y)|\le  C|x - y|^{\alpha}
+        .\] 
+    \end{theorem}
+    \begin{theorem}
+        Если функция удовлетворяет условию Гёльдера, то она равномерно непрерывна.
+    \end{theorem}
+    \begin{proof}
+        \[
+        C > 0 ~  |x - y| < (\frac{\varepsilon}{C})^{\frac{1}{\alpha}}
+        .\] 
+        \[
+        \delta = (\frac{\varepsilon}{C})^{\frac{1}{\alpha}}
+        .\] 
+    \end{proof}
+     \subsection{Пример.}
+     \[
+         D = [0,+\infty] , f(x) = \sqrt{x} 
+     .\] 
+     \[
+     |f(x) - f(y)| = |\sqrt{x}  - \sqrt{y} |
+     .\] 
+     \begin{theorem}
+         Функция f равномерно непрерывна $\iff$ $\forall  (x_{n}), (y_{n}), x_{n}, y_{n} \in D 
+         \implies f(x_{n}) - f(y_{n}) \to 0$
+     \end{theorem}
+     \begin{proof}
+         \begin{enumerate}
+             \item 
+                 Возьмем $\forall (x_{n}) (y_{n}) x_{n} - y_{n} \to 0$.
+                 Нужно доказать $\forall \varepsilon >0 \exists  n_0 \forall  n\ge n_0
+                 |f(x_{n}) - f(y_{n})| < \varepsilon$
+                 Дальше смотрим определение равномерной непрырывности и все понятно.
+            \item
+                Теперь обратно доказываем. От противного
+                \[
+                \exists  \varepsilon > 0 \forall \delta > 0 |x - y| < \delta \land |f(x) - f(y)| > \varepsilon
+                .\] 
+                Берем все такие последовательность $(x_{n}) (y_{n}) x_{n} - y_{n} < \frac{1}{n}$ 
+                \[
+                |x_{n} - y_{n}| \to 0 \implies f(x_{n}) - f(y_{n}) \to 0
+                .\] 
+                По т. о ментах.
+         \end{enumerate}
+     \end{proof}
+     \subsection{Пример функции, которая не является равномерно непрерывной}
+     \[
+     D = (0,+\infty) f(x) = \frac{1}{x}
+     .\] 
+     \[
+     x_{n} = \frac{1}{n}
+     .\] 
+     \[
+     y_{n} = \frac{1}{n + 1}
+     .\] 
+     \[
+     x_{n} - y_{n}= \frac{1}{n(n + 1)} \to 0
+     .\] 
+     \[
+     f(x_{n}) = n
+     .\] 
+     \[
+     f(y_{n}) = n + 1
+     .\] 
+     \[
+     f(x_{n}) - f(y_{n}) = -1 \not \to 0
+     .\] 
+\end{document}
